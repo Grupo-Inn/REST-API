@@ -13,14 +13,25 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Event',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('nombre', models.CharField(max_length=60)),
-                ('descripcion', models.TextField()),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('name', models.CharField(max_length=60)),
+                ('description', models.TextField()),
                 ('url_image', models.CharField(max_length=100)),
-                ('tipo', models.CharField(max_length=20)),
-                ('lugar', models.CharField(max_length=60)),
+                ('place', models.CharField(max_length=60)),
                 ('cupo_max', models.PositiveSmallIntegerField()),
-                ('fecha', models.DateTimeField()),
+                ('cupo_disp', models.PositiveSmallIntegerField()),
+                ('date', models.DateTimeField()),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Reservation',
+            fields=[
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('asistentes', models.PositiveSmallIntegerField()),
+                ('event', models.ForeignKey(related_name='reservations', to='api.Event')),
             ],
             options={
             },
